@@ -31,6 +31,7 @@ class Search extends Component {
     }
     getQueryString = (key) => {
         var str = decodeURI(document.location.href);
+        console.log(str);
         var index = str.indexOf("?") + 1;
         var lastIndex = str.indexOf("#") > -1 ? str.indexOf("#") + 1 : str.length;
         if (index == 0) {
@@ -49,6 +50,7 @@ class Search extends Component {
                 break;
             }
         }
+        console.log(rst);
         return rst;
     }
 
@@ -60,7 +62,7 @@ class Search extends Component {
     }
     enterCheck = (event) =>{
         if(event.keyCode===13){
-        document.location.href="/search/#/?name="+this.state.keyword;
+        document.location.href="/#/search?name="+this.state.keyword;
         }
     }
 
