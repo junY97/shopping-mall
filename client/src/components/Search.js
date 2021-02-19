@@ -60,7 +60,7 @@ class Search extends Component {
     }
     enterCheck = (event) =>{
         if(event.keyCode===13){
-        document.location.href="/search?name="+this.state.keyword;
+        document.location.href="/search/#/?name="+this.state.keyword;
         }
     }
 
