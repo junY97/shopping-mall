@@ -15,7 +15,7 @@ class Search extends Component {
     }
     searchResult = () => {
         var query = this.getQueryString("name");
-        fetch(`/search/api?name=${query}`)
+        fetch(`/searchApi?name=${query}`)
             .then(response => response.json())
             .then(response => this.setState({ result: response }))
             .catch(err => console.log(err));
@@ -23,7 +23,7 @@ class Search extends Component {
     }
     btnSearch = () => {
         var { keyword } = this.state;
-        fetch(`/search/api?name=${keyword}`)
+        fetch(`/searchApi?name=${keyword}`)
             .then(response => response.json())
             .then(response => this.setState({ result: response }))
             .catch(err => console.log(err));
