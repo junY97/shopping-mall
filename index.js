@@ -35,7 +35,7 @@ app.get('/api', (req, res) => {
         }
     )
 });
-app.get('/search', (req, res) => {
+app.get('/search/api', (req, res) => {
     const { name } = req.query;
     const sql = `select * from shoppingMall where pct_name like "%${name}%"`;
     connection.query(sql,
