@@ -16,7 +16,7 @@ class Home extends Component {
             .then(response => response.json())
             .then(response => this.setState({ products: response }))
             .catch(err => console.log(err))
-    }
+}
     comma = (price) => {
         var regexp = /\B(?=(\d{3})+(?!\d))/g;
         price = price + ""
