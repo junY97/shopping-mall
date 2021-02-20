@@ -46,8 +46,10 @@ class Search extends Component {
     }
     enterCheck = (event) =>{
         if(event.keyCode===13){
-            this.props.history.push("/item/search?name="+this.state.keyword);
+            window.location.href="/item/search?name="+this.state.keyword;
+       
         }
+       
     }
     
 
@@ -77,7 +79,7 @@ class Search extends Component {
                     <div className={SearchStyle.item_count}>검색결과 {result.length}건 </div>
                     {result.map((item,index) => {
                         return <div className={SearchStyle.item_list} key={index}>
-                            <img className={SearchStyle.item_img} src={item.imgsource} />
+                            <img className={SearchStyle.item_img} src={item.imgsource} alt={item.pct_name}/>
                             <div className={SearchStyle.info_wrap}>
                                 <span className={SearchStyle.prd_name}>{item.pct_name}<br/></span>
                                 <span className={SearchStyle.prd_price}>{this.comma(item.pct_price)}</span>
