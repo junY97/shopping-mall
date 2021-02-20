@@ -11,7 +11,7 @@ class App extends Component {
     return(
       <BrowserRouter>
         <Route path="/" component={Home} exact={true}/>
-        <Route path="/search" component={Search}/>
+        <Route path="/item/search" component={Search}/>
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register}/>
       </BrowserRouter>

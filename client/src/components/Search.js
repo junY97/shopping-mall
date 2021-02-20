@@ -59,7 +59,7 @@ class Search extends Component {
                         </div>
                         <div className={HomeStyle.search}>
                             <input type="text" className={HomeStyle.search_text}  onChange={e => this.setState({ keyword: e.target.value })} />
-                            <Link className={HomeStyle.search_btn} to={"/search?name=" + this.state.keyword} onClick={this.btnSearch} />
+                            <Link className={HomeStyle.search_btn} to={"/item/search?name=" + this.state.keyword} onClick={this.btnSearch} />
                         </div>
                         <div className={HomeStyle.user_menu}>
                             <ul>
