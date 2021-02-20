@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import HomeStyle from '../css/Home.module.css';
 import SearchStyle from '../css/Search.module.css';
+import queryString from "query-string";
 class Search extends Component {
     state = {
         keyword: '',
@@ -11,10 +12,11 @@ class Search extends Component {
     }
     componentDidMount() {
         this.searchResult();
+      
 
     }
     searchResult = () => {
-        var query = this.getQueryString("name");
+        var query = this.getQueryString();
         fetch(`/search?name=${query}`)
             .then(response => response.json())
             .then(response => this.setState({ result: response }))
@@ -29,28 +31,10 @@ class Search extends Component {
             .catch(err => console.log(err));
 
     }
-    getQueryString = (key) => {
-        var str = decodeURI(document.location.href);
-        console.log(str);
-        var index = str.indexOf("?") + 1;
-        var lastIndex = str.indexOf("#") > -1 ? str.indexOf("#") + 1 : str.length;
-        if (index == 0) {
-            return "";
-        }
-        str = str.substring(index, lastIndex);
-        str = str.split("&");
-        var rst = "";
-        for (var i = 0; i < str.length; i++) {
-            var arr = str[i].split("=");
-            if (arr.length != 2) {
-                break;
-            }
-            if (arr[0] == key) {
-                rst = arr[1];
-                break;
-            }
-        }
-        console.log(rst);
+        getQueryString = () => {
+            const result = queryString.parse(this.props.location.search);
+        const rst=result.name;
+     
         return rst;
     }
 
@@ -62,7 +46,8 @@ class Search extends Component {
     }
     enterCheck = (event) =>{
         if(event.keyCode===13){
-          this.props.history.push("/search?name="+this.state.keyword);
+            window.location.href="/search?name="+this.state.keyword;
+            /*this.props.history.push("/search?name="+this.state.keyword);*/
         }
       
     }
