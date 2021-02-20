@@ -23,11 +23,6 @@ app.use(cors());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
 
-
-app.get('*',(req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-});
-
 app.get('/api', (req, res) => {
     connection.query(
         'select * from shoppingMall',
@@ -91,7 +86,9 @@ app.post('/register', (req, res) => {
 // --> heroku 
 if(process.env.NODE_ENV==='production'){
     app.use(express.static(path.join(__dirname,'client/build')));
- 
+    app.get('*',(req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
 }
 
 
