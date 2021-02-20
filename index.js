@@ -40,7 +40,12 @@ app.get('/search', (req, res) => {
     const sql = `select * from shoppingMall where pct_name like "%${name}%"`;
     connection.query(sql,
         (err, rows, field) => {
+            if(err){
+
+            }
+            else{
             res.send(rows);
+            }
         }
     )
 });
