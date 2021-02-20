@@ -44,7 +44,11 @@ class Search extends Component {
 
         return price.toString().replace(regexp, ',') + "원";
     }
-    
+    enterCheck = (event) =>{
+        if(event.keyCode===13){
+            this.props.history.push("/item/search?name="+this.state.keyword);
+        }
+    }
     
 
 
@@ -58,7 +62,7 @@ class Search extends Component {
                             <div className={HomeStyle.logo_text}>수산마켓</div>
                         </div>
                         <div className={HomeStyle.search}>
-                            <input type="text" className={HomeStyle.search_text}  onChange={e => this.setState({ keyword: e.target.value })} />
+                            <input type="text" className={HomeStyle.search_text}  onKeyUp={this.enterCheck} onChange={e => this.setState({ keyword: e.target.value })} />
                             <Link className={HomeStyle.search_btn} to={"/item/search?name=" + this.state.keyword} onClick={this.btnSearch} />
                         </div>
                         <div className={HomeStyle.user_menu}>
