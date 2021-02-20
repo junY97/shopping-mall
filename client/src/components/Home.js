@@ -41,7 +41,7 @@ class Home extends Component {
                         </div>
                             <div className={style.search}>
                                 <input type="text" className={style.search_text} id="keyword" onKeyUp={this.enterCheck} onChange={e => this.setState({ keyword: e.target.value })} />
-                                <Link className={style.search_btn} id="link" to={"/search?name=" + this.state.keyword}/>
+                                <Link className={style.search_btn} id="link" to={"/search"}/>
                         </div>
                             <div className={style.user_menu}>
                             <ul>
