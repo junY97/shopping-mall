@@ -6,7 +6,8 @@ import H from '../css/Home.module.css';
 class Login extends Component {
     state = {
         inputId:'',
-        inputPs:''
+        inputPs:'',
+        token:'',
     }
     loginApi = () => {
         const options = {
@@ -17,7 +18,9 @@ class Login extends Component {
            }
         }
     
-    return  fetch('/login',options);
+    return  fetch('/login',options)
+    .then(response=>response.json())
+    .then(response=>this.setState({token:response}))
 
     }
     

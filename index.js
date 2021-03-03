@@ -101,22 +101,29 @@ app.post('/login', (req, res) => {
     const id = req.body.inputId;
     const password = crypto.createHmac('sha256', key.secret).update(req.body.inputPs).digest('base64');
     const params = [id, password];
-    const customerInfo={};
+    let customerInfo = [];
     connection.query('select * from member where id=? and password=?', params,
-        (err, rows, field) => {
-            if(err){
+        (err, result, field) => {
+            if (err) {
                 console.log(err);
             }
-            else{
-        
-                console.log(rows);
+            else {
+                customerInfo = result;
+                if (customerInfo.length == 1) {
+                    let token = jwt.sign({
+                       id: customerInfo[0].id   // 토큰의 내용(payload)
+                      },
+                   jwtJSON.secret ,    // 비밀 키
+                      {
+                        expiresIn: '5m'    // 유효 시간은 5분
+                      })
+                      
+                    res.cookie("user",token);
+                    res.send({token:token});
+                }
             }
         }
     )
-    
-    //  const token = jwt.sign({
-    //      CustomerId : 
-    //  });
 }) // => 로그인 
 
 
