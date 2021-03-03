@@ -28,6 +28,9 @@ connection.connect(err => {
     console.log(err);
 });
 
+app.use(helmet({
+    contentSecurityPolicy: false,
+}));
 app.use(cors());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -94,23 +97,27 @@ app.post('/register', (req, res) => {
 })
 
 
-// app.post('/login', (req, res) => {
-//     const id = req.body.inputId;
-//     const password = crypto.createHmac('sha256', key.secret).update(req.body.inputPs).digest('base64');
-//     const params = [id, password];
-//     const customerInfo={};
-//     connection.query('select * from member where id=? and password=?', params,
-//         (err, rows, field) => {
-//             if(err){
-//                 console.log(err);
-//             }
-//             else{
+app.post('/login', (req, res) => {
+    const id = req.body.inputId;
+    const password = crypto.createHmac('sha256', key.secret).update(req.body.inputPs).digest('base64');
+    const params = [id, password];
+    const customerInfo={};
+    connection.query('select * from member where id=? and password=?', params,
+        (err, rows, field) => {
+            if(err){
+                console.log(err);
+            }
+            else{
         
-//                 console.log(rows);
-//             }
-//         }
-//     )
-// }) // => 로그인 
+                console.log(rows);
+            }
+        }
+    )
+    
+    //  const token = jwt.sign({
+    //      CustomerId : 
+    //  });
+}) // => 로그인 
 
 
 
