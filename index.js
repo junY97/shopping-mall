@@ -28,7 +28,6 @@ connection.connect(err => {
     console.log(err);
 });
 
-app.use(helmet());
 app.use(cors());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
