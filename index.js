@@ -12,9 +12,7 @@ const crypto = require('crypto');
 const key = JSON.parse(fs.readFileSync('./key.json'));
 const jwt = require('jsonwebtoken');
 const jwtJSON = JSON.parse(fs.readFileSync("./jwt.json"));
-
-
-
+var cookieParser = require('cookie-parser');
 
 
 const connection = mysql.createConnection({
@@ -31,6 +29,7 @@ connection.connect(err => {
 app.use(helmet({
     contentSecurityPolicy: false,
 }));
+app.use(cookieParser());
 app.use(cors());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -76,7 +75,7 @@ app.get('/idcheck', (req, res) => {
             }
         }
     );
-})
+});
 app.post('/register', (req, res) => {
     const id = req.body.id;
     const password = crypto.createHmac('sha256', key.secret).update(req.body.password).digest('base64'); //암호화
@@ -94,12 +93,12 @@ app.post('/register', (req, res) => {
         }
 
     )
-})
+});
 
 
 app.post('/login', (req, res) => {
     const id = req.body.inputId;
-    const password = crypto.createHmac('sha256', key.secret).update(req.body.inputPs).digest('base64');
+    const password = crypto.createHmac('sha256', key.secret).update(req.body.inputPs).digest('base64'); //암호화
     const params = [id, password];
     let customerInfo = [];
     connection.query('select * from member where id=? and password=?', params,
@@ -111,20 +110,51 @@ app.post('/login', (req, res) => {
                 customerInfo = result;
                 if (customerInfo.length == 1) {
                     let token = jwt.sign({
-                       id: customerInfo[0].id   // 토큰의 내용(payload)
-                      },
-                   jwtJSON.secret ,    // 비밀 키
-                      {
-                        expiresIn: '5m'    // 유효 시간은 5분
-                      })
-                      
-                    res.cookie("user",token);
-                    res.send({token:token});
+                        id: customerInfo[0].id,
+                        nickname: customerInfo[0].nickname   // 토큰의 내용(payload)
+                    },
+                        jwtJSON.secret,    // 비밀 키
+                        {
+                            expiresIn: '5m'    // 유효 시간은 5분
+                        })
+
+                    res.cookie("user", token);
+                    res.send({ success: "true" });
+                }
+                else if (customerInfo.length != 1) {
+                    res.send({ success: "false" })
                 }
             }
         }
     )
-}) // => 로그인 
+}); // => 로그인 
+
+app.delete('/logout',(req,res)=>{
+ res.clearCookie('user').send(req.cookies.name);
+});
+
+app.get("/authority", (req, res) => {
+    let token = req.cookies.user;
+    let decoded = jwt.verify(token, jwtJSON.secret);
+    if (decoded) {
+        res.send(
+            {
+                status: 'login',
+                id: decoded.id,
+                nickname: decoded.nickname
+            }
+        )
+    }
+    else {
+        res.send(
+            {
+                status:'logout'
+            }
+        )
+
+    }
+}); // => 권한확인
+
 
 
 

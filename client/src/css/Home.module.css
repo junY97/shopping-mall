@@ -118,9 +118,11 @@ html,body{
   .util_etc li a{
     color:#111;
     text-decoration: none;
+    
   }
   .util_etc li a:hover{
     color:rgb(39, 131, 230);
+    cursor: pointer;
   }
   .main{
     width:1024px;
