@@ -56,23 +56,26 @@ class Home extends Component {
             <div>
                 <div className={H.header}>
                     <div className={H.inner}>
-                        <div className={H.logo} to="/">
+                        <Link to="/">
+                        <div className={H.logo}>
                             <div className={H.logo_text}>수산마켓</div>
                         </div>
+                        </Link>
                         <div className={H.search}>
                             <input type="text" className={H.search_text} id="keyword" onKeyUp={this.enterCheck} onChange={e => this.setState({ keyword: e.target.value })} />
                             <Link className={H.search_btn} id="link" to={"/item/search?name=" + this.state.keyword} />
                         </div>
                         <div className={H.user_menu}>
                             <ul>
-                                <li className={H.my_cart} />
-                                <li className={H.my_profile} />
+                              <li className={H.my_cart}><span>장바구니</span></li>
+                              <Link to="/Account"> <li className={H.my_profile}><span>회원변경</span></li></Link>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div className={H.util_service}>
                     <div className={H.inner}>
+                        {authority.status==="login"?<div className={H.profile_display}> {authority.nickname}님 환영합니다.   </div>:''}
                         <div className={H.util_etc}>
                             <ul>
                                 <li>{authority.status==="login"?<a onClick={this.logoutApi}>로그아웃</a>:<Link to="/login">로그인</Link>}</li>
@@ -82,8 +85,13 @@ class Home extends Component {
                         </div>
                     </div>
                 </div>
+               
+              
                 <div className={H.main}>
                     <div className={H.item_list}>
+                    <div className={H.left_arrow} />
+                    <div className={H.right_arrow} />
+                    <div>
                         <ul>
                             {products.map((item, index) => {
                                 return (
@@ -98,7 +106,8 @@ class Home extends Component {
                             })
                             }
                         </ul>
-
+                        </div>
+                      
                     </div>
                 </div>
                 <div className={H.bottom} />

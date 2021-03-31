@@ -41,6 +41,14 @@ class Login extends Component {
         }
     }
 
+
+    enterCheck = (event) => {
+        if (event.keyCode === 13) {
+            this.loginApprove();
+        }
+    }
+
+
     render() {
         return (
             <div>
@@ -59,7 +67,7 @@ class Login extends Component {
                             <input className={R.text_field} type="text" onChange={e => this.setState({ inputId: e.target.value })} />
                         </li>
                         <li><div className={R.label_text}>패스워드</div>
-                            <input className={R.text_field} type="password" onChange={e => this.setState({ inputPs: e.target.value })} />
+                            <input className={R.text_field} type="password"  onKeyUp={this.enterCheck} onChange={e => this.setState({ inputPs: e.target.value })} />
 
                         </li>
                         <li><div className={R.btn_box}>
