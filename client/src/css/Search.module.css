@@ -1,0 +1,43 @@
+
+.result_wrap{
+    width:540px;
+    margin:0 auto;
+    margin-top:10px;
+}
+.item_count{
+    font-size:14px;
+    color:#111;
+    font-weight: bold;
+    height:25px;
+    border-bottom: 1px solid rgb(230, 231, 232);
+    margin-bottom:12px;
+
+} 
+.item_list{
+    width:100%;
+    height:180px;
+    padding:10px;
+    border-bottom: 1px solid rgb(230, 231, 232);
+   
+} 
+.item_img{
+    width:180px;
+    height:180px;
+    background-size:cover;
+    position:absolute;
+}
+.info_wrap{
+    width:160px;
+    height:160px;
+    position:relative;
+    left:200px;
+}
+.prd_name{
+    color:#111;
+    font-size:14px;
+}
+.prd_price{
+    font-weight:900;
+    color:#111;
+    font-size:18px;
+}
