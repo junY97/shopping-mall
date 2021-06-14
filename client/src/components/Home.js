@@ -6,6 +6,7 @@ class Home extends Component {
         keyword: '',
         products: [],
         authority: '',
+
     }
     componentDidMount() {
         this.checkAuthority();
@@ -47,6 +48,20 @@ class Home extends Component {
             this.props.history.push("/item/search?name=" + this.state.keyword);
         }
     }
+    
+    checklogin = (menu) => {
+     if(this.state.authority.id){
+          if(menu==="2"){
+              document.location.href="/Account";
+          }
+     }
+     
+     else{  
+         alert('로그인 후 이용 가능합니다.');
+         document.location.href="/login";
+        }
+    }
+    
     effect1 = () => {
         var leftB = document.getElementById("leftB");
         var rightB = document.getElementById("rightB");
@@ -170,7 +185,7 @@ class Home extends Component {
                         <div className={H.user_menu}>
                             <ul>
                                 <li className={H.my_cart}><span>장바구니</span></li>
-                                <Link to="/Account"> <li className={H.my_profile}><span>회원변경</span></li></Link>
+                                <a onClick={()=>this.checklogin("2")}>  <li className={H.my_profile}><span>회원변경</span></li></a>
                             </ul>
                         </div>
                     </div>
