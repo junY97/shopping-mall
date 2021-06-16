@@ -1,0 +1,7 @@
+{
+    "host":"db-instance.cd3hukjajkb7.us-east-2.rds.amazonaws.com",
+    "user":"admin",
+    "password":"dlxkcl1590~!",
+    "port":"3306",
+    "database":"management"
+}
