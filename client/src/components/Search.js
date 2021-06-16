@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import H from '../css/Home.module.css';
 import S from '../css/Search.module.css';
 import queryString from "query-string";
+import { Top } from './Home';
 class Search extends Component {
     state = {
         keyword: '',
@@ -23,14 +23,14 @@ class Search extends Component {
             .catch(err => console.log(err));
 
     }
-    btnSearch = () => {
-        var { keyword } = this.state;
-        fetch(`/search?name=${keyword}`)
-            .then(response => response.json())
-            .then(response => this.setState({ result: response }))
-            .catch(err => console.log(err));
+    // btnSearch = () => {
+    //     var { keyword } = this.state;
+    //     fetch(`/search?name=${keyword}`)
+    //         .then(response => response.json())
+    //         .then(response => this.setState({ result: response }))
+    //         .catch(err => console.log(err));
 
-    }
+    // }
     getQueryString = () => {
         const result = queryString.parse(this.props.location.search);
         const rst = result.name;
@@ -58,25 +58,7 @@ class Search extends Component {
         const { result } = this.state;
         return (
             <div>
-                <div className={H.header}>
-                    <div className={H.inner}>
-                        <Link to="/">
-                            <div className={H.logo}>
-                                <div className={H.logo_text}>수산마켓</div>
-                            </div>
-                        </Link>
-                        <div className={H.search}>
-                            <input type="text" className={H.search_text} onKeyUp={this.enterCheck} onChange={e => this.setState({ keyword: e.target.value })} />
-                            <Link className={H.search_btn} to={"/item/search?name=" + this.state.keyword} onClick={this.btnSearch} />
-                        </div>
-                        <div className={H.user_menu}>
-                            <ul>
-                                <li className={H.my_cart} />
-                                <li className={H.my_profile} />
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <Top/>
                 <div className={S.result_wrap}>
                     <div className={S.item_count}>검색결과 {result.length}건 </div>
                     {result.map((item, index) => {

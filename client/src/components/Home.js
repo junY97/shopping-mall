@@ -1,16 +1,42 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import H from '../css/Home.module.css';
-class Home extends Component {
+export class Top extends Component {
     state = {
-        keyword: '',
-        products: [],
         authority: '',
-
     }
     componentDidMount() {
         this.checkAuthority();
-        this.getProducts();
+    }
+    logoutApi = () => {
+        fetch('/logout', {
+            method: 'delete'
+        });
+        window.location.replace("/");
+
+    }
+    enterCheck = (event) => {
+        if (event.keyCode === 13) {
+            document.location.href = "/item/search?name=" + this.state.keyword;
+        }
+    }
+    search = () => {
+        document.location.href = "/item/search?name=" + this.state.keyword;
+
+    }
+
+
+    checklogin = (menu) => {
+        if (this.state.authority.id) {
+            if (menu === "2") {
+                document.location.href = "/Account";
+            }
+        }
+
+        else {
+            alert('로그인 후 이용 가능합니다.');
+            document.location.href = "/login";
+        }
     }
 
     checkAuthority = () => {
@@ -18,6 +44,58 @@ class Home extends Component {
             .then(response => response.json())
             .then(response => this.setState({ authority: response }))
 
+    }
+
+    render() {
+        const { authority } = this.state;
+        return (
+            <div>
+                <div className={H.header}>
+                    <div className={H.inner}>
+                        <Link to="/">
+                            <div className={H.logo}>
+                                <div className={H.logo_text}>수산마켓</div>
+                            </div>
+                        </Link>
+                        <div className={H.search}>
+                            <input type="text" className={H.search_text} id="keyword" onKeyUp={this.enterCheck} onChange={e => this.setState({ keyword: e.target.value })} />
+                            <a className={H.search_btn} id="link" onClick={this.search} />
+                        </div>
+                        <div className={H.user_menu}>
+                            <ul>
+                                <li className={H.my_cart}><span>장바구니</span></li>
+                                <a onClick={() => this.checklogin("2")}>  <li className={H.my_profile}><span>회원변경</span></li></a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={H.util_service}>
+                    <div className={H.inner}>
+                        {authority.status === "login" ? <div className={H.profile_display}> 【{authority.nickname}님】   </div> : ''}
+                        <div className={H.util_etc}>
+                            <ul>
+                                <li>{authority.status === "login" ? <a onClick={this.logoutApi}>로그아웃</a> : <Link to="/login">로그인</Link>}</li>
+                                <li><Link to="/register">회원가입</Link></li>
+                                <li>고객센터</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+class Home extends Component {
+    state = {
+        keyword: '',
+        products: [],
+
+
+    }
+    componentDidMount() {
+        this.getProducts();
     }
 
 
@@ -28,13 +106,7 @@ class Home extends Component {
             .catch(err => console.log(err))
     }
 
-    logoutApi = () => {
-        fetch('/logout', {
-            method: 'delete'
-        });
-        window.location.replace("/");
 
-    }
 
 
     comma = (price) => {
@@ -43,25 +115,8 @@ class Home extends Component {
 
         return price.toString().replace(regexp, ',') + "원";
     }
-    enterCheck = (event) => {
-        if (event.keyCode === 13) {
-            this.props.history.push("/item/search?name=" + this.state.keyword);
-        }
-    }
-    
-    checklogin = (menu) => {
-     if(this.state.authority.id){
-          if(menu==="2"){
-              document.location.href="/Account";
-          }
-     }
-     
-     else{  
-         alert('로그인 후 이용 가능합니다.');
-         document.location.href="/login";
-        }
-    }
-    
+
+
     effect1 = () => {
         var leftB = document.getElementById("leftB");
         var rightB = document.getElementById("rightB");
@@ -103,11 +158,11 @@ class Home extends Component {
             document.getElementById("slice").value = slice + 1;
         }
         for (var i = 0; i < 3; i++) {
-                let slice = parseInt(document.getElementById("slice").value);   
-            if (i === slice  ) {
+            let slice = parseInt(document.getElementById("slice").value);
+            if (i === slice) {
                 chapter[slice].style.backgroundColor = "rgb(39, 131, 230)";
             }
-            else{
+            else {
                 chapter[i].style.backgroundColor = "snow";
             }
 
@@ -155,11 +210,11 @@ class Home extends Component {
             document.getElementById("slice").value = slice - 1;
         }
         for (var i = 0; i < 3; i++) {
-            let slice = parseInt(document.getElementById("slice").value);   
+            let slice = parseInt(document.getElementById("slice").value);
             if (i === slice) {
                 chapter[slice].style.backgroundColor = "rgb(39, 131, 230)";
             }
-            else{
+            else {
                 chapter[i].style.backgroundColor = "snow";
             }
         }
@@ -168,40 +223,10 @@ class Home extends Component {
 
     render() {
         const { products } = this.state;
-        const { authority } = this.state;
         return (
             <div className={H.homewrap}>
-                <div className={H.header}>
-                    <div className={H.inner}>
-                        <Link to="/">
-                            <div className={H.logo}>
-                                <div className={H.logo_text}>수산마켓</div>
-                            </div>
-                        </Link>
-                        <div className={H.search}>
-                            <input type="text" className={H.search_text} id="keyword" onKeyUp={this.enterCheck} onChange={e => this.setState({ keyword: e.target.value })} />
-                            <Link className={H.search_btn} id="link" to={"/item/search?name=" + this.state.keyword} />
-                        </div>
-                        <div className={H.user_menu}>
-                            <ul>
-                                <li className={H.my_cart}><span>장바구니</span></li>
-                                <a onClick={()=>this.checklogin("2")}>  <li className={H.my_profile}><span>회원변경</span></li></a>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div className={H.util_service}>
-                    <div className={H.inner}>
-                        {authority.status === "login" ? <div className={H.profile_display}> {authority.nickname}님 환영합니다.   </div> : ''}
-                        <div className={H.util_etc}>
-                            <ul>
-                                <li>{authority.status === "login" ? <a onClick={this.logoutApi}>로그아웃</a> : <Link to="/login">로그인</Link>}</li>
-                                <li><Link to="/register">회원가입</Link></li>
-                                <li>고객센터</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+
+                <Top />
                 <div className={H.arrows}>
                     <button className={H.left_arrow} id="leftB" onClick={this.effect2} />
                     <button className={H.right_arrow} id="rightB" onClick={this.effect1} />
@@ -248,5 +273,6 @@ class Home extends Component {
         )
     }
 }
+
 
 export default Home;

@@ -18,6 +18,8 @@ class UpdateCusotmer extends Component {
         fetch('/authority')
             .then(response => response.json())
             .then(response => this.setState({ authority: response }))
+            .then(()=>this.setState({nickname:this.state.authority.nickname,address:this.state.authority.address}))
+            
     }
 
     sendData = () => {

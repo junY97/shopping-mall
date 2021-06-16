@@ -7,7 +7,7 @@ import Search from './components/Search'
 import Register from './components/Register';
 import Login from './components/Login';
 import UpdateCustomer from './components/UpdateCustomer';
-
+import Item from './components/Item';
 class App extends Component {
   render(){
     return(
@@ -17,7 +17,7 @@ class App extends Component {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register}/>
         <Route path="/Account" component={UpdateCustomer}/>
-      
+        <Route path="/itempage" component={Item}/>
       </BrowserRouter>
     )
   }
