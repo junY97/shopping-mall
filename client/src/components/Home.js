@@ -72,7 +72,7 @@ export class Top extends Component {
 
                 <div className={H.util_service}>
                     <div className={H.inner}>
-                        {authority.status === "login" ? <div className={H.profile_display}> 【{authority.nickname}님】   </div> : ''}
+                        {authority.status === "login" ? <div className={H.profile_display}> 【 {authority.nickname} 님 】   </div> : ''}
                         <div className={H.util_etc}>
                             <ul>
                                 <li>{authority.status === "login" ? <a onClick={this.logoutApi}>로그아웃</a> : <Link to="/login">로그인</Link>}</li>
@@ -217,10 +217,13 @@ class Home extends Component {
             else {
                 chapter[i].style.backgroundColor = "snow";
             }
-        }
-
-    }   //상품 왼쪽으로 넘기기
-
+        } //상품 왼쪽으로 넘기기
+    }  
+    
+    itempage = (item) =>{
+        document.location.href = "/itempage?item="+item;         
+    }
+    
     render() {
         const { products } = this.state;
         return (
@@ -241,7 +244,7 @@ class Home extends Component {
                                             <li key={index}>
                                                 <input type="hidden" value="0" id="slice" />
                                                 <div className={H.item_wrap}>
-                                                    <img className={H.item_img} src={item.imgsource} alt={item.pct_name} />
+                                                    <a onClick={()=>this.itempage(index+1)}><img className={H.item_img} src={item.imgsource} alt={item.pct_name} /></a>
                                                     <div className={H.item_text}> {item.pct_name}</div>
                                                     <div className={H.item_price} >{this.comma(item.pct_price)}</div>
                                                 </div>

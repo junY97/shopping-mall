@@ -1,0 +1,11 @@
+.page_wrap{
+    width:1200px;
+    margin:0 auto;
+}
+.product_image{
+    width:400px;
+    height: 400px;
+    margin-top:60px;
+    background-size: cover;
+    border:1px solid black;
+}

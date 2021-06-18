@@ -102,6 +102,7 @@ app.post('/login', (req, res) => {
     const id = req.body.inputId;
     const password = crypto.createHmac('sha256', key.secret).update(req.body.inputPs).digest('base64'); //암호화
     const params = [id, password];
+    console.log(id);
     let customerInfo = [];
     connection.query('select * from member where id=? and password=?', params,
         (err, result, field) => {
@@ -168,6 +169,7 @@ app.post("/customerUpdate", (req, res) => {
     const address = req.body.address;
     const password = crypto.createHmac('sha256', key.secret).update(req.body.password).digest('base64');
     const params = [password,nickname,address,id]
+  
     connection.query('update member set password=?, nickname=?, address=? where id=?', params,
         (err, result, field) => {
             if(err){
@@ -177,10 +179,22 @@ app.post("/customerUpdate", (req, res) => {
                 res.send(result);
             }
         })
+       
 
 });
 
-
+app.get("/itemApi",(req,res)=>{
+    const {item}=req.query;
+    connection.query('select * from shoppingMall where num=?',item,
+    (err,result,field) =>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(result);
+        }
+    })
+});
 
 
 if (process.env.NODE_ENV === 'production') {

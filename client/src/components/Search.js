@@ -23,14 +23,7 @@ class Search extends Component {
             .catch(err => console.log(err));
 
     }
-    // btnSearch = () => {
-    //     var { keyword } = this.state;
-    //     fetch(`/search?name=${keyword}`)
-    //         .then(response => response.json())
-    //         .then(response => this.setState({ result: response }))
-    //         .catch(err => console.log(err));
 
-    // }
     getQueryString = () => {
         const result = queryString.parse(this.props.location.search);
         const rst = result.name;

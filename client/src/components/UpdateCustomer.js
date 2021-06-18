@@ -8,8 +8,7 @@ class UpdateCusotmer extends Component {
         passwordCheck: '',
         nickname: '',
         address: '',
-        authority: ''
-
+        authority: '',
     }
     componentDidMount() {
         this.checkAuthority();
@@ -21,9 +20,15 @@ class UpdateCusotmer extends Component {
             .then(()=>this.setState({nickname:this.state.authority.nickname,address:this.state.authority.address}))
             
     }
+    logoutApi = () => {
+        fetch('/logout', {
+            method: 'delete'
+        });
+        document.location.href="/";
+    }
+ 
 
     sendData = () => {
-        console.log(this.state.authority);
         const options = {
             method: 'post',
             body: JSON.stringify(this.state),
@@ -40,8 +45,8 @@ class UpdateCusotmer extends Component {
             }
             else {
                 fetch('customerUpdate', options)
-                    .then(() => alert('변경 되었습니다.'))
-                    .then(() => document.location.href = '/')
+                .then(() => alert('변경 되었습니다. \n새 정보로 다시 로그인 부탁드립니다.'))
+                .then(this.logoutApi)
             }
         }
         else {
