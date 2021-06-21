@@ -38,7 +38,7 @@ export class Top extends Component {
 
         else {
             alert('로그인 후 이용 가능합니다.');
-            document.location.href = "/login?returnURL"+this.props.ReturnUrl;
+            document.location.href = "/login?ReturnUrl="+this.props.ReturnUrl;
         }
     }
 
