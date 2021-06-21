@@ -4,15 +4,18 @@ import H from '../css/Home.module.css';
 export class Top extends Component {
     state = {
         authority: '',
+     
     }
     componentDidMount() {
         this.checkAuthority();
+    
+       
     }
     logoutApi = () => {
         fetch('/logout', {
             method: 'delete'
         });
-        window.location.replace("/");
+        document.location.href= this.props.ReturnUrl;
 
     }
     enterCheck = (event) => {
@@ -35,7 +38,7 @@ export class Top extends Component {
 
         else {
             alert('로그인 후 이용 가능합니다.');
-            document.location.href = "/login";
+            document.location.href = "/login?returnURL"+this.state.url;
         }
     }
 
@@ -50,6 +53,7 @@ export class Top extends Component {
         const { authority } = this.state;
         return (
             <div>
+              {console.log(this.props.ReturnUrl)}
                 <div className={H.header}>
                     <div className={H.inner}>
                         <Link to="/">
@@ -75,7 +79,7 @@ export class Top extends Component {
                         {authority.status === "login" ? <div className={H.profile_display}> 【 {authority.nickname} 님 】   </div> : ''}
                         <div className={H.util_etc}>
                             <ul>
-                                <li>{authority.status === "login" ? <a onClick={this.logoutApi}>로그아웃</a> : <Link to="/login">로그인</Link>}</li>
+                                <li>{authority.status === "login" ? <a onClick={this.logoutApi}>로그아웃</a> : <Link to={"/login?ReturnUrl="+this.props.ReturnUrl}>로그인</Link>}</li>
                                 <li><Link to="/register">회원가입</Link></li>
                                 <li>고객센터</li>
                             </ul>
@@ -229,7 +233,7 @@ class Home extends Component {
         return (
             <div className={H.homewrap}>
 
-                <Top />
+                <Top ReturnUrl={document.location.href}/>
                 <div className={H.arrows}>
                     <button className={H.left_arrow} id="leftB" onClick={this.effect2} />
                     <button className={H.right_arrow} id="rightB" onClick={this.effect1} />

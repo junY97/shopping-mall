@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import S from '../css/Search.module.css';
 import queryString from "query-string";
 import { Top } from './Home';
@@ -51,7 +50,7 @@ class Search extends Component {
         const { result } = this.state;
         return (
             <div>
-                <Top/>
+                <Top ReturnUrl={document.location.href}/>
                 <div className={S.result_wrap}>
                     <div className={S.item_count}>검색결과 {result.length}건 </div>
                     {result.map((item, index) => {

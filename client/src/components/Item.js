@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import I from '../css/Item.module.css';
 import { Top } from './Home';
+
 import queryString from "query-string";
 class Item extends Component {
     state = {
@@ -8,6 +9,8 @@ class Item extends Component {
     }
     componentDidMount() {
         this.searchResult();
+      
+
     }
     searchResult = () => {
         var query = this.getQueryString();
@@ -30,42 +33,32 @@ class Item extends Component {
 
         return price.toString().replace(regexp, ',') + "원";
     }
-    colorChange = () => {
-        var color = ["orange","pink","yellow","blue","black","skyblue","red"];
-        setInterval(() => {
-            for(var i=0;i<color.length();i++){
-                document.getElementById("change").color= color[i];
-            }
-        }, 1000);
-    }
+
 
     render() {
         const { result } = this.state;
         return (
             <div>
-                <Top />
+                <Top ReturnUrl={document.location.href}/>
                 <div className={I.page_wrap}>
                     {result.map((item, index) => {
                         return (
                             <div className={I.product_wrap} key={index}>
-                            <img className={I.product_image} src={item.imgsource} alt={item.pct_name} />
-                            <div className={I.product_title}>{item.pct_name}</div>
-                            <div className={I.product_rank}>실검순위 <span id="change" className={I.change}>#99</span></div>
-                            {(function(){
-                                setInterval(() => {
-                                         var random = Math.floor(Math.random()*7);
-                                        var mix = ["orange","purple","green","skyblue","red"];
-                                          document.getElementById("change").style.color = mix[random];
-
-                                 },600);
-                            })()}
-                            <div className={I.product_price}>{this.comma(item.pct_price)}</div>
+                                <img className={I.product_image} src={item.imgsource} alt={item.pct_name} />
+                                <div className={I.product_title}>{item.pct_name}</div>
+                                <div className={I.product_rank}>실검순위 <span className={I.change}>#99</span></div>
+                                <div className={I.product_price}>{this.comma(item.pct_price)}</div>
+                                <div className={I.product_tip}>실검순위, 평점, 조회수는 실시간 데이터 기반으로 측정됩니다.</div>
+                                <div className={I.product_tooltip}>
+                                    <div className={I.product_rate}><div className={I.star_image} /> 평점 <br /> 5점/10점 </div>
+                                    <div className={I.product_search}><div className={I.tag_image} />{item.click}회 <br /> 조회됨</div>
+                                    <div className={I.product_delivery}><div className={I.deliver_image} /> 무료배송</div>
+                                </div>
                             </div>
-
                         )
                     })
                     }
-                   
+                       <div className={I.cart_wrap}/>
                 </div>
             </div>
         )

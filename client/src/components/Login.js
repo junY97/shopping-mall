@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import H from '../css/Home.module.css';
 import R from '../css/Register.module.css';
-import { Link } from 'react-router-dom';
+import queryString from "query-string";
 
 class Login extends Component {
     state = {
@@ -10,7 +10,21 @@ class Login extends Component {
         inputPs: '',
         loginCheck: []
     }
+    componentDidMount(){
+    this.getQueryString();
+    }
 
+    getQueryString = () => {
+        const result = queryString.parse(this.props.location.search);
+        const rst = result.ReturnUrl;
+        
+       return rst;
+
+    }
+    loginCancel = () => {
+        var page = this.getQueryString();
+        document.location.href = page;
+    }
     loginApprove = async () => {
         const options = {
             method: "post",
@@ -19,6 +33,7 @@ class Login extends Component {
                 'Content-Type': 'application/json'
             }
         }
+    
         const { inputId, inputPs } = this.state;
         if (inputId === '') {
             alert("ID를 입력해주세요");
@@ -34,10 +49,12 @@ class Login extends Component {
         const { loginCheck } = this.state;
         if (loginCheck.success === 'true') {
             alert("로그인이 되었습니다.");
-            document.location.href = '/';
+            var page = this.getQueryString();
+            document.location.href=page;
         }
         else if (loginCheck.success === 'false') {
             alert("로그인 정보가 일치하지 않습니다");
+
         }
     }
 
@@ -71,7 +88,7 @@ class Login extends Component {
 
                         </li>
                         <li><div className={R.btn_box}>
-                            <input type="button" value="로그인" onClick={this.loginApprove} className={R.btn_submit} /> <Link className={R.btn_cancel} to={"/"}>취소</Link>
+                            <input type="button" value="로그인" onClick={this.loginApprove} className={R.btn_submit} /> <a className={R.btn_cancel} onClick={this.loginCancel}>취소</a>
                         </div>
                         </li>
                     </ul>
