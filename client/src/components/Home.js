@@ -271,7 +271,9 @@ class Home extends Component {
                     </div>
 
                 </div>
-                <div className={H.bottom} />
+                <div className={H.bottom} >본 페이지는 상업적인 사이트가 아닌 개인 공부용도로 제작되었으며, 상품 이미지에 대한 저작권은 11번가측에 있습니다.
+                                         <br/>상품이미지 클릭시 상세페이지로 이동합니다. 제작자 이메일 : whwnsdud2024@naver.com
+                </div>
             </div>
         )
     }

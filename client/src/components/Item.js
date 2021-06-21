@@ -24,6 +24,21 @@ class Item extends Component {
 
         return rst;
     }
+    comma = (price) => {
+        var regexp = /\B(?=(\d{3})+(?!\d))/g;
+        price = price + ""
+
+        return price.toString().replace(regexp, ',') + "원";
+    }
+    colorChange = () => {
+        var color = ["orange","pink","yellow","blue","black","skyblue","red"];
+        setInterval(() => {
+            for(var i=0;i<color.length();i++){
+                document.getElementById("change").color= color[i];
+            }
+        }, 1000);
+    }
+
     render() {
         const { result } = this.state;
         return (
@@ -32,11 +47,25 @@ class Item extends Component {
                 <div className={I.page_wrap}>
                     {result.map((item, index) => {
                         return (
-
+                            <div className={I.product_wrap} key={index}>
                             <img className={I.product_image} src={item.imgsource} alt={item.pct_name} />
+                            <div className={I.product_title}>{item.pct_name}</div>
+                            <div className={I.product_rank}>실검순위 <span id="change" className={I.change}>#99</span></div>
+                            {(function(){
+                                setInterval(() => {
+                                         var random = Math.floor(Math.random()*7);
+                                        var mix = ["orange","purple","green","skyblue","red"];
+                                          document.getElementById("change").style.color = mix[random];
+
+                                 },600);
+                            })()}
+                            <div className={I.product_price}>{this.comma(item.pct_price)}</div>
+                            </div>
+
                         )
                     })
                     }
+                   
                 </div>
             </div>
         )

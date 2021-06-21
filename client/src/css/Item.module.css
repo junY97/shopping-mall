@@ -1,11 +1,46 @@
+body{
+  font-family:"Noto Sans KR", "Helvetica Neue", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", "돋움", dotum, sans-serif;
+}
 .page_wrap{
     width:1200px;
     margin:0 auto;
 }
+.product_wrap{
+    width:800px;
+    height:600px;
+    position:absolute;
+ 
+}
 .product_image{
-    width:400px;
-    height: 400px;
+    width:500px;
+    height: 500px;
     margin-top:60px;
     background-size: cover;
     border:1px solid black;
+    float:left;
+}
+.product_title{
+    font-size:36px;
+    margin-top:60px;
+    position: relative;
+    left:50px;
+    color:#111;
+    
+}
+.product_rank{
+   font-style:italic;
+   left:50px;
+   position: relative;
+}
+.product_price{
+font-size:26px;
+font-weight:bold;
+position: relative;
+left:50px;
+top:40px;
+
+}
+.change{
+    font-weight:bold;
+    color:black;
 }
