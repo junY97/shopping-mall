@@ -8,7 +8,8 @@ class Register extends Component {
         password: '',
         nickname: '',
         address: '',
-        idcheck: ''
+        idcheck: '',
+        active:'false'
     }
     idCheck = async () => {
         const { id } = this.state;
@@ -22,6 +23,8 @@ class Register extends Component {
         }
         else if (idcheck.length === 0) {
             alert('해당 ID는 사용가능합니다.');
+            this.setState({active:'true'})
+            
         }
         else if(idcheck.length===1){
             alert('해당 ID는 이미 존재합니다.');
@@ -41,8 +44,8 @@ class Register extends Component {
             }
         }
       await this.idCheck; 
-        const {id, password, nickname, idcheck } = this.state;
-        if (id !== '' & password !== '' & nickname !== '' & idcheck.length === 0) {
+        const {id, password, nickname, active } = this.state;
+        if (id !== '' & password !== '' & nickname !== '' & active ==='true' ) {
             return fetch("/register", options)
                 .then(() => alert('가입되었습니다.'))
                 .then(() => document.location.href = '/')
@@ -51,7 +54,7 @@ class Register extends Component {
             if(id===''){
                 alert('ID 입력 바랍니다.');
             }
-            else if (idcheck.length !==0) {
+            else if (active === 'false') {
                 alert('ID 중복확인 바랍니다.');
             }
             else if (password === '') {
