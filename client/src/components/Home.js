@@ -53,7 +53,6 @@ export class Top extends Component {
         const { authority } = this.state;
         return (
             <div>
-              {console.log(this.props.ReturnUrl)}
                 <div className={H.header}>
                     <div className={H.inner}>
                         <Link to="/">

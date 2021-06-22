@@ -9,7 +9,7 @@ class Item extends Component {
     }
     componentDidMount() {
         this.searchResult();
-      
+
 
     }
     searchResult = () => {
@@ -39,7 +39,7 @@ class Item extends Component {
         const { result } = this.state;
         return (
             <div>
-                <Top ReturnUrl={document.location.href}/>
+                <Top ReturnUrl={document.location.href} />
                 <div className={I.page_wrap}>
                     {result.map((item, index) => {
                         return (
@@ -58,7 +58,17 @@ class Item extends Component {
                         )
                     })
                     }
-                       <div className={I.cart_wrap}/>
+                   
+                   <div className={I.cart_wrap}>
+                       <div className={I.select_btn}>
+                             <div className={I.btn_increase}/>
+                             <input type="text" value="1" className={I.count}/>
+                             <div className={I.btn_decrease}/>
+
+                        </div>
+                    </div>
+                
+                
                 </div>
             </div>
         )
