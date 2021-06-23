@@ -113,12 +113,74 @@ top:40px;
     background-color:#fff;
 }
 .select_btn{
-    width:300px;
-    height:50px;
-    top:450px;
-    background-color: red;
+    width:105px;
+    height:30px;
+    top:350px;
+    left:30px;
     position: relative;
+  border: 1px solid #111;
 }
 .btn_increase{
-    
+    background: url('../image/increase.png');
+    background-size:cover;
+    width:30px;
+    height:30px;
+    border:0;
+    border-right:1px solid #111;
+    cursor:pointer;
+    float:left;
+}
+.btn_decrease{
+    background: url('../image/minus.png');
+    background-size:cover;
+    width:30px;
+    height:30px;
+    border:0px;
+    cursor:pointer;
+    border-left:1px solid #111;
+    left:15px;
+    position: relative;
+}
+
+.count{
+    border:0;
+    font-size:20px;
+    position: relative;
+    float:left;
+    width:30px;
+    left:10px;
+    text-align: center;
+    font-weight: bold;
+  
+}
+.how_much{
+    font-size:14px;
+    color:#111;
+    position: relative;
+    top:400px;
+    left:30px;
+}
+.price_sum{
+    font-size:33px;
+    color:red;
+    font-weight: bold;
+    position: relative;
+    top:400px;
+    left:30px;   
+}
+.cart_btn{
+    width:180px;
+    height:60px;
+    background-color: #f43142;
+    position: relative;
+    top:450px;
+    left:30px;
+    border: 1px solid #fff ;
+    text-align: center;
+    color:#fff;
+    font-size:22px;
+    font-weight:bold;
+    box-shadow:0px 15px 18px -2px rgb(0 0 0 / 8%), 0px 0px 5px 0px rgb(0 0 0 / 28%);
+    cursor:pointer;
+    line-height:60px;
 }

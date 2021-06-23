@@ -196,6 +196,22 @@ app.get("/itemApi",(req,res)=>{
     })
 });
 
+app.post("/cart",(req,res)=>{
+    var num=req.body.result[0].num;
+    var count=req.body.count;
+    var id = req.body.authority.id;
+    const params = [null,id,num,count];
+    connection.query('insert into shoppingCart values(?,?,?,?)', params,
+        (err, result, field) => {
+            if(err){
+                console.log(err)
+            }
+            else{
+                res.send(result);
+            }
+        });
+})
+
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, 'client/build')));

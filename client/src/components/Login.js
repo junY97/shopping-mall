@@ -81,7 +81,7 @@ class Login extends Component {
                     <h1>로그인</h1>
                     <ul>
                         <li><div className={R.label_text}>아이디</div>
-                            <input className={R.text_field} type="text" onChange={e => this.setState({ inputId: e.target.value })} />
+                            <input className={R.text_field} type="text" onChange={e => this.setState({ inputId: e.target.value })} autoFocus/>
                         </li>
                         <li><div className={R.label_text}>패스워드</div>
                             <input className={R.text_field} type="password"  onKeyUp={this.enterCheck} onChange={e => this.setState({ inputPs: e.target.value })} />
