@@ -122,12 +122,12 @@ cursor:pointer;
   font-size: 14px;
   line-height: 40px;
   font-weight: bold;
-  right:250px;
- 
+  right:240px;
+  color:darkorchid;
 }
 .util_etc{
   position: absolute;
-  right:0px;
+  right:60px;
   padding:2px;
 }
 .util_etc li{

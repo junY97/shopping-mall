@@ -66,7 +66,7 @@ export class Top extends Component {
                         </div>
                         <div className={H.user_menu}>
                             <ul>
-                                <li className={H.my_cart}><span>장바구니</span></li>
+                                <Link to ="/Mycart"><li className={H.my_cart}><span>장바구니</span></li></Link>
                                 <a onClick={() => this.checklogin("2")}>  <li className={H.my_profile}><span>회원변경</span></li></a>
                             </ul>
                         </div>
@@ -80,7 +80,6 @@ export class Top extends Component {
                             <ul>
                                 <li>{authority.status === "login" ? <a onClick={this.logoutApi}>로그아웃</a> : <Link to={"/login?ReturnUrl="+this.props.ReturnUrl}>로그인</Link>}</li>
                                 <li><Link to="/register">회원가입</Link></li>
-                                <li>고객센터</li>
                             </ul>
                         </div>
                     </div>

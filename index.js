@@ -102,7 +102,6 @@ app.post('/login', (req, res) => {
     const id = req.body.inputId;
     const password = crypto.createHmac('sha256', key.secret).update(req.body.inputPs).digest('base64'); //암호화
     const params = [id, password];
-    console.log(id);
     let customerInfo = [];
     connection.query('select * from member where id=? and password=?', params,
         (err, result, field) => {
@@ -207,10 +206,38 @@ app.post("/cart",(req,res)=>{
                 console.log(err)
             }
             else{
-                res.send(result);
+                res.send(result)
             }
         });
-})
+});
+
+app.post("/mycart",(req,res)=>{
+    var id = req.body.authority.id;
+    connection.query('select shoppingCart.num, pct_name,pct_price, shoppingCart.much, imgsource FROM shoppingMall INNER JOIN shoppingCart ON shoppingMall.num = shoppingCart.num WHERE shoppingCart.id=?',id,
+    (err,result,field)=>{
+       if(err){
+           console.log(err)
+       } 
+       else{
+           res.send(result)
+       }
+    });
+
+});
+
+app.post("/mycartDelete",(req,res)=>{
+    var num = req.body.num;
+    
+    connection.query('delete from shoppingCart where num = ?', num,
+    (err,result,field)=>{
+        if(err){
+            console.log(err)
+        }
+        else{
+            res.send(result)
+        }
+    })
+});
 
 
 if (process.env.NODE_ENV === 'production') {
