@@ -15,6 +15,7 @@ class Mycart extends Component {
     }
 
     cartApi = async () => {
+      
         await fetch('/authority')
             .then(response => response.json())
             .then(response => this.setState({ authority: response }))
@@ -26,6 +27,7 @@ class Mycart extends Component {
             })
             .then(response => response.json())
             .then(response => this.setState({ result: response }))
+            .then(this.onVisible)
     }
 
     reLoginCheck = () => {
@@ -33,6 +35,8 @@ class Mycart extends Component {
             .then(response => response.json())
             .then(response => this.setState({ authority: response }))
     }
+
+   
 
     buyAction = async () => {
         await this.reLoginCheck();
@@ -65,7 +69,7 @@ class Mycart extends Component {
                 headers: { 'Content-Type': 'application/json' }
             })
             .then(response => response)
-            .then(document.location.href=document.location.href)
+            .then(setTimeout(()=>document.location.href=document.location.href,1000))
             
             
        }

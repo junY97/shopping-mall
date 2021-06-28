@@ -1,6 +1,9 @@
 *{
     font-family:"Noto Sans KR", "Helvetica Neue", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", "돋움", dotum, sans-serif;
 }
+.root3{
+    visibility: hidden;
+}
 .cart_wrap{
     width:1200px;
     margin : 0 auto;
