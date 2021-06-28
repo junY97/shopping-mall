@@ -213,7 +213,7 @@ app.post("/cart",(req,res)=>{
 
 app.post("/mycart",(req,res)=>{
     var id = req.body.authority.id;
-    connection.query('select shoppingCart.num, pct_name,pct_price, shoppingCart.much, imgsource FROM shoppingMall INNER JOIN shoppingCart ON shoppingMall.num = shoppingCart.num WHERE shoppingCart.id=?',id,
+    connection.query('select shoppingCart.num, pct_name,pct_price, shoppingCart.much, imgsource FROM shoppingMall INNER JOIN shoppingCart ON shoppingMall.num = shoppingCart.pct_num WHERE shoppingCart.id=?',id,
     (err,result,field)=>{
        if(err){
            console.log(err)
