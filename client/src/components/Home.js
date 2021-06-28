@@ -46,7 +46,13 @@ export class Top extends Component {
         fetch('/authority')
             .then(response => response.json())
             .then(response => this.setState({ authority: response }))
+            .then(this.onVisible)
+            
 
+
+    }
+    onVisible = () =>   {
+        document.getElementById("root").style.visibility = "visible";
     }
 
     render() {
@@ -229,6 +235,7 @@ class Home extends Component {
     render() {
         const { products } = this.state;
         return (
+        
             <div className={H.homewrap}>
 
                 <Top ReturnUrl={document.location.href}/>

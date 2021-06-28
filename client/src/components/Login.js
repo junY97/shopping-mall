@@ -12,6 +12,7 @@ class Login extends Component {
     }
     componentDidMount(){
     this.getQueryString();
+    this.onVisible();
     }
 
     getQueryString = () => {
@@ -20,6 +21,9 @@ class Login extends Component {
         
        return rst;
 
+    }
+    onVisible = () =>   {
+        document.getElementById("root").style.visibility = "visible";
     }
     loginCancel = () => {
         var page = this.getQueryString();

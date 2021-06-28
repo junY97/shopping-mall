@@ -1,6 +1,9 @@
 body,html{
     font-family:"Noto Sans KR", "Helvetica Neue", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", "돋움", dotum, sans-serif;
 }
+#root{
+    visibility: visible;
+}
 .body_wrap{
     width:1050px;
     margin:0 auto;

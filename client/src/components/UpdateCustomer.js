@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import H from '../css/Home.module.css';
 import R from '../css/Register.module.css';
 import { Link } from 'react-router-dom';
+
 class UpdateCusotmer extends Component {
     state = {
         password: '',
@@ -12,13 +13,18 @@ class UpdateCusotmer extends Component {
     }
     componentDidMount() {
         this.checkAuthority();
+        this.onVisible();
     }
     checkAuthority = () => {
         fetch('/authority')
             .then(response => response.json())
             .then(response => this.setState({ authority: response }))
             .then(()=>this.setState({nickname:this.state.authority.nickname,address:this.state.authority.address}))
+          
             
+    }
+        onVisible = () =>   {
+        document.getElementById("root").style.visibility = "visible";
     }
     logoutApi = () => {
         fetch('/logout', {

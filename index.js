@@ -119,7 +119,7 @@ app.post('/login', (req, res) => {
                     },
                         jwtJSON.secret,    // 비밀 키
                         {
-                            expiresIn: '5m'    // 유효 시간은 5분
+                            expiresIn: '1m'    // 유효 시간은 5분
                         })
 
                     res.cookie("user", token);
@@ -139,8 +139,9 @@ app.delete('/logout', (req, res) => {
 
 app.get("/authority", (req, res) => {
     let token = req.cookies.user;
-    let decoded = jwt.verify(token, jwtJSON.secret);
-    if (decoded) {
+    
+    try{
+        let decoded = jwt.verify(token, jwtJSON.secret);
         res.send(
             {
                 status: 'login',
@@ -150,14 +151,11 @@ app.get("/authority", (req, res) => {
             }
         )
     }
-    else {
-        res.send(
-            {
-                status: 'logout'
-            }
-        )
-
+    
+    catch(err){
+      res.send({status:'logout'})
     }
+    
 }); // => 회원 정보 확인
 
 app.post("/customerUpdate", (req, res) => {
