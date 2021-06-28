@@ -41,3 +41,16 @@
     color:#111;
     font-size:18px;
 }
+.item_go{
+    position: relative;
+    left:190px;
+    top:100px;
+    background-color: #fff;
+    border: 1px solid red ;
+    text-align: center;
+    color:#111;
+    font-size:14px;
+    font-weight:bold;
+    height:30px;
+    cursor:pointer;
+}

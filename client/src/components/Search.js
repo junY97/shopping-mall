@@ -43,6 +43,9 @@ class Search extends Component {
         }
 
     }
+    pageGo = (data) => {
+        document.location.href = "/itempage?item="+data;
+    }
 
 
 
@@ -59,8 +62,9 @@ class Search extends Component {
                             <div className={S.info_wrap}>
                                 <span className={S.prd_name}>{item.pct_name}<br /></span>
                                 <span className={S.prd_price}>{this.comma(item.pct_price)}</span>
-
+                                <button className={S.item_go} onClick={()=>this.pageGo(item.num)}>상세페이지 이동</button>
                             </div>
+                           
                         </div>
                     })}
                 </div>
