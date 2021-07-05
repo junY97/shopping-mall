@@ -87,7 +87,7 @@ class Item extends Component {
                                     <div className={I.product_title}>{item.pct_name}</div>
                                     <div className={I.product_rank}>실검순위 <span className={I.change}>#99</span></div>
                                     <div className={I.product_price}>{this.comma(item.pct_price)}</div>
-                                    <div className={I.product_tip}>실검순위, 평점, 조회수는 실시간 데이터 기반으로 측정됩니다.</div>
+                                    <div className={I.product_tip}>실검순위, 평점, 조회수는 실시간 데이터 기반으로 측정됩니다. (현재 개발 진행중, 아직 미구현)</div>
                                     <div className={I.product_tooltip}>
                                         <div className={I.product_rate}><div className={I.star_image} /> 평점 <br /> 5점/10점 </div>
                                         <div className={I.product_search}><div className={I.tag_image} />{item.click}회 <br /> 조회됨</div>
